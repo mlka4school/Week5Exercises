@@ -15,7 +15,9 @@ namespace TicTacToe
 			int currentTurn = 0;
 			bool CPUmode = false;
 			string failmessage = "";
-			
+			Random CPURandom = new Random();
+
+
 			StartGame: Console.Clear();
 			Console.WriteLine("Select a mode:");
 			
@@ -44,53 +46,83 @@ namespace TicTacToe
 			// probably a good idea to check the win condition here. there are an infinite amount of ways to do this better but we'll do it my way.
 			for (var v = 0; v < 3; ++v){
 				for (var h = 0; h < 3; ++h){
-					// vertical checks
 					if (v == 1 && h == 1){
 						if (ticBoard[0,0] == currentTurn+1 && ticBoard[1,1] == currentTurn+1 && ticBoard[2,2] == currentTurn+1) goto GameOver;
 						if (ticBoard[2,0] == currentTurn+1 && ticBoard[1,1] == currentTurn+1 && ticBoard[0,2] == currentTurn+1) goto GameOver;
-					}else{
-						if (v == 1){
-							if (ticBoard[h,0] == currentTurn+1 && ticBoard[h,1] == currentTurn+1 && ticBoard[h,2] == currentTurn+1) goto GameOver;
-						}
-						// horizontal checks
-						if (h == 1){
-							if (ticBoard[0,v] == currentTurn+1 && ticBoard[1,v] == currentTurn+1 && ticBoard[2,v] == currentTurn+1) goto GameOver;
-						}
+					}
+					// vertical checks
+					if (v == 1){
+						if (ticBoard[h,0] == currentTurn+1 && ticBoard[h,1] == currentTurn+1 && ticBoard[h,2] == currentTurn+1) goto GameOver;
+					}
+					// horizontal checks
+					if (h == 1){
+						if (ticBoard[0,v] == currentTurn+1 && ticBoard[1,v] == currentTurn+1 && ticBoard[2,v] == currentTurn+1) goto GameOver;
 					}
 				}
 			}
-			// check the draw condition too
-			++currentTurn; if (currentTurn > 1) currentTurn = 0;
+			// check the draw condition too. again, many better ways to do this probably.
+			for (var v = 0; v < 3; ++v){
+				for (var h = 0; h < 3; ++h){
+					if (ticBoard[h,v] == 0) goto TurnContinue;
+				}
+			}
+			goto DrawGame; // if the loop succeeds, then clearly the game is suppose to end
+			TurnContinue: ++currentTurn; if (currentTurn > 1) currentTurn = 0;
 			RetryTurn: Console.Clear();
 			if (failmessage != "") Console.WriteLine(failmessage);
 			Console.WriteLine("It is Player "+(currentTurn+1).ToString()+"'s turn");
 			DrawBoard(ticBoard);
-			Console.WriteLine("Type out your next move (xy)");
-			var move = 0;
-			if (int.TryParse(Console.ReadLine(),out move)){
-				// convert this into something trymove can actually use
-				var xtry = -1;
-				var ytry = -1;
-				if (move.ToString().Length == 2){
-					var mvstring = move.ToString();
-					xtry = int.Parse(mvstring.Substring(0,1));
-					ytry = int.Parse(mvstring.Substring(1,1));
-					if (TryMove(xtry,ytry,ref ticBoard,ref currentTurn,ref failmessage)){
-						goto NextTurn;
+			if (currentTurn == 1 && CPUmode){ // computer
+				// let's randomly decide a spot and see if it works.
+				// first, we need to get a list of spots that are fine.
+				var goodList = new List<int[]>();
+				// add the spots that aren't filled
+				for (var v = 0; v < 3; ++v){
+					for (var h = 0; h < 3; ++h){
+						if (ticBoard[h,v] == 0){
+							goodList.Add(new int[]{h,v});
+						}
+					}
+				}
+				// pick from the bag we randomized
+				var randPick = goodList[CPURandom.Next(0,goodList.Count-1)];
+				TryMove(randPick[0]+1,randPick[1]+1,ref ticBoard,ref currentTurn,ref failmessage);
+				goto NextTurn;
+			}else{ // player
+				Console.WriteLine("Type out your next move (xy)");
+				var move = 0;
+				if (int.TryParse(Console.ReadLine(),out move)){
+					// convert this into something trymove can actually use
+					var xtry = -1;
+					var ytry = -1;
+					if (move.ToString().Length == 2){
+						var mvstring = move.ToString();
+						xtry = int.Parse(mvstring.Substring(0,1));
+						ytry = int.Parse(mvstring.Substring(1,1));
+						if (TryMove(xtry,ytry,ref ticBoard,ref currentTurn,ref failmessage)){
+							goto NextTurn;
+						}else{
+							goto RetryTurn;
+						}
 					}else{
+						failmessage = "Incorrect format (eg. try 11, 23, etc.)";
 						goto RetryTurn;
 					}
 				}else{
-					failmessage = "Incorrect format (eg. try 11, 23, etc.)";
+					failmessage = "Invalid cast";
 					goto RetryTurn;
 				}
-			}else{
-				failmessage = "Invalid cast";
-				goto RetryTurn;
 			}
 
 			GameOver: Console.Clear();
 			Console.WriteLine("Player "+(currentTurn+1).ToString()+" wins!");
+			DrawBoard(ticBoard);
+			Console.WriteLine("Press any key to continue...");
+			Console.ReadKey();
+			goto StartGame;
+
+			DrawGame: Console.Clear();
+			Console.WriteLine("Nobody wins.");
 			DrawBoard(ticBoard);
 			Console.WriteLine("Press any key to continue...");
 			Console.ReadKey();

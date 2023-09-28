@@ -1,0 +1,8 @@
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\bin\Debug\InventorySys.exe.config
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\bin\Debug\InventorySys.exe
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\bin\Debug\InventorySys.pdb
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\obj\Debug\InventorySys.csproj.AssemblyReference.cache
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\obj\Debug\InventorySys.csproj.SuggestedBindingRedirects.cache
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\obj\Debug\InventorySys.csproj.CoreCompileInputs.cache
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\obj\Debug\InventorySys.exe
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\InventorySys\obj\Debug\InventorySys.pdb

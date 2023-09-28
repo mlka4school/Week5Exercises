@@ -1,0 +1,8 @@
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\bin\Debug\LibraryCatalog.exe.config
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\bin\Debug\LibraryCatalog.exe
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\bin\Debug\LibraryCatalog.pdb
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\obj\Debug\LibraryCatalog.csproj.AssemblyReference.cache
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\obj\Debug\LibraryCatalog.csproj.SuggestedBindingRedirects.cache
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\obj\Debug\LibraryCatalog.csproj.CoreCompileInputs.cache
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\obj\Debug\LibraryCatalog.exe
+C:\Users\JacksonCooper\Documents\GitHub\Week5Exercises\LibraryCatalog\obj\Debug\LibraryCatalog.pdb
